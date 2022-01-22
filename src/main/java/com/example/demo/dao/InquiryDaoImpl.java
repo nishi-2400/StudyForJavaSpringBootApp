@@ -21,7 +21,6 @@ public class InquiryDaoImpl implements InquiryDao {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	
 	@Override
 	public void insertInquiry(Inquiry inquiry) {
 		jdbcTemplate.update("INSERT INTO inquiry(name, email, contents, created)  VALUES (?, ?, ?, ?)",
@@ -44,6 +43,12 @@ public class InquiryDaoImpl implements InquiryDao {
 			list.add(inquiry);
 		}
 		return list;
+	}
+	
+	@Override
+	public int updateInquiry(Inquiry inquiry) {
+		return jdbcTemplate.update("UPDATE inquiry set name = ?, email = ?, contents = ? WHERE id  = ?", 
+				inquiry.getName(),  inquiry.getEmail(), inquiry.getContents(), inquiry.getId());
 	}
 
 }
